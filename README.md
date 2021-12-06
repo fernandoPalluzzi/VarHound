@@ -9,7 +9,7 @@ can be applied to any other DNA/RNA sequencing panel.
 
 To be done.
 
-## Quick guide
+## User guide
 
 To be done.
 
