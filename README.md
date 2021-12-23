@@ -19,4 +19,4 @@ To be done.
 
 ## Disclaimer
 
-VarHound is an ongoing project for TSO500 validation. Although I am happy to share the code with the community, it is still in its empryo stage!
+VarHound is an ongoing project for TSO500 validation. Although I am happy to share the code with the community, it is still in its embryo stage!
