@@ -9,9 +9,9 @@ can be applied to any other DNA/RNA sequencing panel.
 
 To be done.
 
-## User guide
+## Coverage diagnostics for the TSO500 assay.
 
-To be done.
+...
 
 ## Links to other repos
 
