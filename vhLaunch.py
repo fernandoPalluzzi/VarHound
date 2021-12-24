@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# VarHound - TSO500 - Launcher
+# VarHound - TSO500 - Coverage diagnostics launcher
 
 import os
 import sys
