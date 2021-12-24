@@ -16,7 +16,6 @@ runtype <- args[4]
 
 if (as.numeric(args[5]) > 1) {
 	vh.covrun(covdir, runtype)
-	
 } else {
 	vh.covgen(covdir, runtype)
 }
