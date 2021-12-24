@@ -22,12 +22,6 @@
 
 # -------------------------------------------------------------------- #
 
-library(dplyr)
-library(ggplot2)
-library(reshape2)
-library(Cairo)
-library(mclust)
-
 vh.bar <- function(bardata, plot.name, w = 20, h = 10, u = 'in', r = 450, cairo = TRUE) {
 	if (cairo) {
 		CairoPNG(plot.name, width = w, height = h, units = u, res = r)
@@ -282,6 +276,93 @@ vh.covtable <- function(M, level, depths = c("50x", "100x", "250x", "500x")) {
 	return(Q)
 }
 
+vh.genecov <- function(covdir, p = 75, d = "500x",
+                       depths = c("50x", "100x", "250x", "500x"),
+                       runtype = "snv", w = 20, h = 10, u = 'in', r = 450,
+                       color = c("lightblue", "green3", "gold", "darkorange"),
+                       line.color = c("darkblue", "darkgreen", "brown", "darkred"),
+                       x.lab = "Gene",
+                       y.lab = "Exon Median Percent Coverage (MPC)",
+                       outdir = "", init = 9) {
+	
+	x <- cov.data(directory = covdir, include = NULL,
+	              cleanup = "Exon",
+	              runtype = "snv",
+	              format = "bed")
+	
+	covdata <- cov.aggregate(x, t1 = depths[1], t2 = depths[2],
+	                            t3 = depths[3], t4 = depths[4],
+	                            init = 7, barplot = FALSE,
+	                            percent = TRUE,
+	                            xlab = x.lab, ylab = y.lab,
+	                            dummy = TRUE)$covdata
+	
+	info <- data.frame(t(sapply(sapply(covdata$region,
+	                   function(j) strsplit(j, "_")), c)))
+	names(info) <- c("symbol", "exon", "GeneID")
+	
+	covdata <- cbind(covdata[, 1:4], info, covdata[, 5:ncol(covdata)])
+	R <- R <- covdata[, colnames(covdata) %in% c("Depth", "symbol", "median")]
+	names(R) <- c("Gene", "Coverage", "Depth")
+	
+	M1 <- vh.reorder(R, depth = depths[1], level = "gene")[, c(3, 1, 2, 4)]
+	rDataset1 <- as.factor(M1$rDataset[M1$Depth == depths[1]])
+	Depth1 <- as.factor(M1$Depth[M1$Depth == depths[1]])
+	
+	M2 <- vh.reorder(R, depth = depths[2], level = "gene")[, c(3, 1, 2, 4)]
+	rDataset2 <- as.factor(M2$rDataset[M2$Depth == depths[2]])
+	Depth2 <- as.factor(M2$Depth[M2$Depth == depths[2]])
+	
+	M3 <- vh.reorder(R, depth = depths[3], level = "gene")[, c(3, 1, 2, 4)]
+	rDataset3 <- as.factor(M3$rDataset[M3$Depth == depths[3]])
+	Depth3 <- as.factor(M3$Depth[M3$Depth == depths[3]])
+	
+	M <- vh.reorder(R, depth = depths[4], level = "gene")[, c(3, 1, 2, 4)]
+	rDataset <- as.factor(M$rDataset[M$Depth == depths[4]])
+	Depth <- as.factor(M$Depth[M$Depth == depths[4]])
+	
+	B <- list(depth1 = list(M = M1, rDataset = rDataset1, Depth = Depth1),
+	          depth2 = list(M = M2, rDataset = rDataset2, Depth = Depth2),
+	          depth3 = list(M = M3, rDataset = rDataset3, Depth = Depth3),
+	          ref = list(M = M, rDataset = rDataset, Depth = Depth))
+	
+	if (!is.null(runtype)) {
+		if (outdir != "") outdir <- paste0(outdir, "/")
+		for (j in 1:4) {
+			png(paste0(outdir, "TSO500_", toupper(runtype),
+			           "_coverage_byGene_", depths[j], ".png"),
+			           width = w, height = h, units = u, res = r)
+			
+			B[[j]]$M$rDataset <- as.factor(B[[j]]$M$rDataset)
+			
+			print(ggplot(B[[j]]$M[B[[j]]$M$Depth == depths[j],],
+			      aes(x = rDataset, y = Coverage, fill = Depth)) +
+			      geom_boxplot(outlier.size = -1) +
+			      scale_fill_manual(name = "Depth", values = color[j]) +
+			      theme_bw() +
+			      theme(panel.border = element_blank(),
+			        panel.grid.major = element_line(),
+			        panel.grid.minor = element_blank(),
+			        axis.line = element_line(colour = "black"),
+			        axis.text = element_text(size = 14),
+			        axis.text.x = element_text(angle = 50,
+			                                   vjust = 1, hjust = 1),
+			        axis.title = element_text(size = 26, face = "bold"),
+			        legend.key.size = unit(1, "cm"),
+			        legend.text = element_text(size = 22),
+			        legend.title = element_text(size = 24)) +
+			      geom_hline(yintercept = 75, linetype = "dashed",
+			                 color = line.color[j]) +
+			      scale_y_continuous(limits = c(0, 100)) +
+			      labs(x = x.lab, y = y.lab))
+			dev.off()
+		}
+	}
+	names(covdata)[11] <- "Q1"
+	
+	return(list(Q1 = covdata, B = B))
+}
+
 vh.blacklist <- function(samples, covdata, p = 75, d = "500x",
                          depths = c("50x", "100x", "250x", "500x"),
                          runtype = "snv", w = 20, h = 10, u = 'in', r = 450,
@@ -405,10 +486,9 @@ vh.covrun <- function(covdir, runtype = "snv",
 		runtype <- tolower(runtype[length(runtype)])
 	}
 	if (!(runtype %in% c("snv", "cnv", "rna"))) stop("invalid run type.")
-	message("# Done.\n")
-	
 	outdir <- paste0(covdir, "/CoverageDiagnostics")
 	dir.create(outdir)
+	message("# Done.\n")
 	
 	message("# Whole-run diagnostics ...")
 	x <- vh.panel(covdir, runtype = runtype,
@@ -464,6 +544,39 @@ vh.covrun <- function(covdir, runtype = "snv",
 	                       d = depths[3],
 	                       outdir = outdir)
 	ebl500 <- vh.exonblack(blacklist$Q1, runtype = runtype,
+	                       d = depths[4],
+	                       outdir = outdir)
+	message("# Done.\n")
+}
+
+vh.covgen <- function(covdir, runtype = "snv",
+                      depths = c("50x", "100x", "250x", "500x")) {
+	
+	message("\n# Creating coverage diagnostics paths ...")
+	if (runtype == "auto") {
+		runtype <- strsplit(covdir, "/")[[1]]
+		runtype <- tolower(runtype[length(runtype)])
+	}
+	if (!(runtype %in% c("snv", "cnv", "rna"))) stop("invalid run type.")
+	outdir <- paste0(covdir, "/CoverageDiagnostics")
+	dir.create(outdir)
+	message("# Done.\n")
+	
+	message("# Exon coverage diagnostics ...")
+	G <- vh.genecov(covdir, outdir = outdir)
+	message("# Done.\n")
+	
+	message("# Extracting blacklisted regions ...")
+	ebl50 <- vh.exonblack(G$Q1, runtype = runtype,
+	                      d = depths[1],
+	                      outdir = outdir)
+	ebl100 <- vh.exonblack(G$Q1, runtype = runtype,
+	                       d = depths[2],
+	                       outdir = outdir)
+	ebl250 <- vh.exonblack(G$Q1, runtype = runtype,
+	                       d = depths[3],
+	                       outdir = outdir)
+	ebl500 <- vh.exonblack(G$Q1, runtype = runtype,
 	                       d = depths[4],
 	                       outdir = outdir)
 	message("# Done.\n")
