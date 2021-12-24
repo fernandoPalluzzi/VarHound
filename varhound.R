@@ -42,8 +42,8 @@ cov.preprocess <- function(file, include = NULL, cleanup = NULL, runtype = NULL)
 		coll <- ifelse(include == "", include, "|")
 		if (runtype == "snv") {
 			g <- paste0("PIK3CA|EGFR|ALK|ROS1|BRAF|RET|",
-						"BRCA1|BRCA2|KIT|PDGFRA|KRAS|NRAS|",
-						"NTRK1|NTRK2|NTRK3")
+				    "BRCA1|BRCA2|KIT|PDGFRA|KRAS|NRAS|",
+				    "NTRK1|NTRK2|NTRK3")
 		} else if (runtype == "cnv") {
 			g <- paste0("ALK|BRAF|BRCA1|BRCA2|EGFR|KIT|KRAS|NRAS|",
 			            "PDGFRA|PIK3CA|RET")
@@ -70,14 +70,14 @@ cov.yield <- function(file, yield = "sequential", g = 2) {
 		j <- c(1, 1, 1, 2, 3, 4)
 	} else if (yield == "sequential") {
 		W <- data.frame(CY100 = -100*(x$x100 - x$x50)/(x$x50 + 1),
-						CY250 = -100*(x$x250 - x$x100)/(x$x100 + 1),
-						CY500 = -100*(x$x500 - x$x250)/(x$x250 + 1))
+				CY250 = -100*(x$x250 - x$x100)/(x$x100 + 1),
+				CY500 = -100*(x$x500 - x$x250)/(x$x250 + 1))
 		labs <- c("CY100", "CY250", "CY500")
 		j <- c(1, 2, 1, 2, 3, 3)
 	} else if (yield == "reference") {
 		W <- data.frame(CY100 = -100*(x$x100 - x$x50)/(x$x50 + 1),
-						CY250 = -100*(x$x250 - x$x50)/(x$x50 + 1),
-						CY500 = -100*(x$x500 - x$x50)/(x$x50 + 1))
+				CY250 = -100*(x$x250 - x$x50)/(x$x50 + 1),
+				CY500 = -100*(x$x500 - x$x50)/(x$x50 + 1))
 		labs <- c("CY100", "CY250", "CY500")
 		j <- c(1, 2, 1, 2, 3, 3)
 	}
