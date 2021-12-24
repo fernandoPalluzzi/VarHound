@@ -1,6 +1,8 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
+# VarHound - TSO500 - Launcher
+
 import os
 import sys
 from subprocess import call
