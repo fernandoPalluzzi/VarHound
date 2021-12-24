@@ -8,7 +8,7 @@ import sys
 from subprocess import call
 
 # VarHound absolute path
-VarHound = "~/varhound"
+VarHound = "~/VarHound"
 
 # Coverage (unzipped) file extension
 suffix = "thresholds.bed"
