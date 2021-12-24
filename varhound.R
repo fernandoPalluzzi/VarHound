@@ -142,7 +142,7 @@ cov.long <- function(file, include = NULL, cleanup = NULL, runtype = NULL) {
 cov.data <- function(directory, include = NULL, cleanup = NULL,
                      runtype = NULL, format = "bed") {
 	check <- TRUE
-	for (file in list.files(directory)) {
+	for (file in list.files(directory, recursive = TRUE)) {
 		ext <- strsplit(file, "\\.")[[1]]
 		if (ext[length(ext)] == format) {
 			file.path <- paste0(directory, "/", file)
