@@ -10,7 +10,7 @@ import shutil
 from subprocess import call
 
 # VarHound absolute path
-VarHound = "~/vhtest/VarHound"
+VarHound = "~/VarHound"
 
 # Coverage (unzipped) file extension
 suffix = "thresholds.bed"
