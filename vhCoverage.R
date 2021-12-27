@@ -1,26 +1,10 @@
-#  VarHound - Coverage diagnostics
+# VarHound - TSO500 - Coverage diagnostics
 
-#  Copyright (C) 2021 Fernando Palluzzi
-#  e-mail: <fernando.palluzzi@gmail.com>
-#  Bioinformatics facility,
-#  Gemelli Science and Technological Park (GSTeP),
-#  Fondazione Policlinico Universitario Agostino Gemelli IRCCS,
-#  Largo Agostino Gemelli 8, 00168 Rome, Italy
-
-#  VarHound is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-
-#  VarHound is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-# -------------------------------------------------------------------- #
+#library(dplyr)
+#library(ggplot2)
+#library(reshape2)
+#library(Cairo)
+#library(mclust)
 
 vh.bar <- function(bardata, plot.name, w = 20, h = 10, u = 'in', r = 450, cairo = TRUE) {
 	if (cairo) {
@@ -278,7 +262,8 @@ vh.covtable <- function(M, level, depths = c("50x", "100x", "250x", "500x")) {
 
 vh.genecov <- function(covdir, p = 75, d = "500x",
                        depths = c("50x", "100x", "250x", "500x"),
-                       runtype = "snv", w = 20, h = 10, u = 'in', r = 450,
+                       runtype = "snv", format = "bed",
+                       w = 20, h = 10, u = 'in', r = 450,
                        color = c("lightblue", "green3", "gold", "darkorange"),
                        line.color = c("darkblue", "darkgreen", "brown", "darkred"),
                        x.lab = "Gene",
@@ -288,7 +273,7 @@ vh.genecov <- function(covdir, p = 75, d = "500x",
 	x <- cov.data(directory = covdir, include = NULL,
 	              cleanup = "Exon",
 	              runtype = "snv",
-	              format = "bed")
+	              format = format)
 	
 	covdata <- cov.aggregate(x, t1 = depths[1], t2 = depths[2],
 	                            t3 = depths[3], t4 = depths[4],
@@ -478,7 +463,8 @@ vh.covreport <- function(samples, genes, runtype, outdir = "") {
 }
 
 vh.covrun <- function(covdir, runtype = "snv",
-                      depths = c("50x", "100x", "250x", "500x")) {
+                      depths = c("50x", "100x", "250x", "500x"),
+                      suffix = "bed") {
 	
 	message("\n# Creating coverage diagnostics paths ...")
 	if (runtype == "auto") {
@@ -486,8 +472,11 @@ vh.covrun <- function(covdir, runtype = "snv",
 		runtype <- tolower(runtype[length(runtype)])
 	}
 	if (!(runtype %in% c("snv", "cnv", "rna"))) stop("invalid run type.")
+	
 	outdir <- paste0(covdir, "/CoverageDiagnostics")
-	dir.create(outdir)
+	if (!file.exists(outdir)) {
+		dir.create(outdir)
+	}
 	message("# Done.\n")
 	
 	message("# Whole-run diagnostics ...")
@@ -550,7 +539,8 @@ vh.covrun <- function(covdir, runtype = "snv",
 }
 
 vh.covgen <- function(covdir, runtype = "snv",
-                      depths = c("50x", "100x", "250x", "500x")) {
+                      depths = c("50x", "100x", "250x", "500x"),
+                      suffix = "bed") {
 	
 	message("\n# Creating coverage diagnostics paths ...")
 	if (runtype == "auto") {
@@ -563,7 +553,7 @@ vh.covgen <- function(covdir, runtype = "snv",
 	message("# Done.\n")
 	
 	message("# Exon coverage diagnostics ...")
-	G <- vh.genecov(covdir, outdir = outdir)
+	G <- vh.genecov(covdir, outdir = outdir, format = suffix)
 	message("# Done.\n")
 	
 	message("# Extracting blacklisted regions ...")

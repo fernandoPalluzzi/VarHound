@@ -15,7 +15,8 @@ covdir <- args[3]
 runtype <- args[4]
 
 if (as.numeric(args[5]) > 1) {
-	vh.covrun(covdir, runtype)
+	vh.covrun(covdir, runtype, suffix = args[6])
+	
 } else {
-	vh.covgen(covdir, runtype)
+	vh.covgen(covdir, runtype, suffix = args[6])
 }
