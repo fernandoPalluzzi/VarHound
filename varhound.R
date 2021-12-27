@@ -135,8 +135,8 @@ cov.data <- function(directory, include = NULL, cleanup = NULL,
                      runtype = NULL, format = "bed") {
 	check <- TRUE
 	for (file in list.files(directory, recursive = TRUE)) {
-		sample.name <- strsplit(file, "\\.")[[1]][1]
-		if (grepl(format, file)) {
+		if (endsWith(file, format)) {
+			sample.name <- strsplit(file, "\\.")[[1]][1]
 			file.path <- paste0(directory, "/", file)
 			if (check) {
 				R <- cov.long(file.path, include, cleanup,
@@ -146,6 +146,7 @@ cov.data <- function(directory, include = NULL, cleanup = NULL,
 				R <- data.frame(R, p = cov.long(file.path, include,
 				                                cleanup, runtype)[, 9])
 			}
+			sample.name <- basename(sample.name)
 			names(R)[ncol(R)] <- sample.name
 		}
 	}
