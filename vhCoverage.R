@@ -494,7 +494,7 @@ vh.covrun <- function(covdir, runtype = "snv",
 	message("# Done.\n")
 	
 	message("# Whole-run diagnostics ...")
-	x <- vh.panel(covdir, runtype = runtype,
+	x <- vh.panel(covdir, runtype = runtype, format = suffix,
 				  plot.name = "wholePanel_exonCoverage.png",
 				  y.label = "Percent of covered exons",
 				  outdir = outdir)
