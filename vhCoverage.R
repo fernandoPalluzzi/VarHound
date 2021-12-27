@@ -563,7 +563,9 @@ vh.covgen <- function(covdir, runtype = "snv",
 	}
 	if (!(runtype %in% c("snv", "cnv", "rna"))) stop("invalid run type.")
 	outdir <- paste0(covdir, "/CoverageDiagnostics")
-	dir.create(outdir)
+	if (!file.exists(outdir)) {
+		dir.create(outdir)
+	}
 	message("# Done.\n")
 	
 	message("# Exon coverage diagnostics ...")
