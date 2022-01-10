@@ -15,6 +15,9 @@ VarHound = "~/VarHound"
 # Coverage (unzipped) file extension
 suffix = "thresholds.bed"
 
+if len(sys.argv) == 1:
+	exit("VarHound software - v0.0.2\n" +
+	      "USAGE:\n  vhLaunch.py COVERAGE_DIRECTORY [snv|cnv|rna]")
 
 covpath = os.path.normpath(sys.argv[1])
 vhrunx = ' ' + os.path.join(VarHound, "vhLaunch.R")
@@ -34,10 +37,7 @@ for root, sub, files in os.walk(covpath):
 F = ' ' + str(len(F))
 suffix = ' ' + suffix
 
-if len(sys.argv) == 1:
-	print("VarHound software - v0.0.2\n" +
-	      "USAGE:\n  vhLaunch.py COVERAGE_DIRECTORY [snv|cnv|rna]")
-elif len(sys.argv) > 2:
+if len(sys.argv) > 2:
 	run = ' ' + sys.argv[2]
 else:
 	run = ' snv'
