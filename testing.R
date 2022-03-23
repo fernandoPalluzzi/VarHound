@@ -96,7 +96,7 @@ run <- vh.panel(covdir = "~/VarHound/test_snv_coverage",
 		depths = depths,
 		plot.name = "wholePanel_exonCoverage.png",
 		y.label = "Percent of covered exons",
-		outdir = outdir)
+		outdir = "./")
 
 R <- vh.reshape(run$covdata, level = "sample")
 M <- vh.reorder(R, depth = "x100", level = "sample")
@@ -135,11 +135,13 @@ if (!file.exists(outdir)) dir.create(outdir)
 
 # Whole-panel diagnostics
 
-run <- vh.panel(covdir = covdir, runtype = runtype,
-                format = "bed", depths = depths,
-				plot.name = "wholePanel_exonCoverage.png",
-				y.label = "Percent of covered exons",
-				outdir = outdir)
+run <- vh.panel(covdir = covdir,
+		runtype = runtype,
+                format = "bed",
+		depths = depths,
+		plot.name = "wholePanel_exonCoverage.png",
+		y.label = "Percent of covered exons",
+		outdir = outdir)
 
 head(run$covdata)
 
