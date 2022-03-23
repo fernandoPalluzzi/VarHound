@@ -91,10 +91,12 @@ plot(Q1$bar)
 
 # Preparing run-level covdata aggregates
 run <- vh.panel(covdir = "~/VarHound/test_snv_coverage",
-                runtype = "snv", format = "bed", depths = depths,
-				plot.name = "wholePanel_exonCoverage.png",
-				y.label = "Percent of covered exons",
-				outdir = "./")
+                runtype = "snv",
+		format = "bed",
+		depths = depths,
+		plot.name = "wholePanel_exonCoverage.png",
+		y.label = "Percent of covered exons",
+		outdir = outdir)
 
 R <- vh.reshape(run$covdata, level = "sample")
 M <- vh.reorder(R, depth = "x100", level = "sample")
