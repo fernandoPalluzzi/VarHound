@@ -37,7 +37,7 @@ source("~/VarHound/vhCoverage.R")
 
 ### Unit test 1: Input header.
 
-x <- read.delim("~/varhound_dev/TSO500_COVERAGE/test/16AP_DNA.thresholds.bed", stringsAsFactors = FALSE)
+x <- read.delim("~/VarHound/test_snv_coverage/TSO500_SNV_testSample.bed", stringsAsFactors = FALSE)
 #h <- colnames(x)
 #m <- regexpr("[xX]*\\d+[xX]*", h)
 #h <- c(h[m == -1], paste0("x", str_replace_all(h[m > 0], "[xX]", "")))
@@ -47,7 +47,7 @@ h
 
 ### Unit Test 2: Coverage data acquisition.
 
-x <- cov.preprocess("~/varhound_dev/TSO500_COVERAGE/test/16AP_DNA.thresholds.bed")
+x <- cov.preprocess("~/VarHound/test_snv_coverage/TSO500_SNV_testSample.bed")
 head(x)
 dim(x)
 
@@ -56,12 +56,12 @@ dim(x)
 
 # Longtype coverage data
 # [chrom, start, end, region, ID, time, coverage, length, p]
-x.long <- cov.long("~/varhound_dev/TSO500_COVERAGE/test/16AP_DNA.thresholds.bed")
+x.long <- cov.long("~/VarHound/test_snv_coverage/TSO500_SNV_testSample.bed")
 head(x.long)
 
 # Covdata format
 # [chrom, start, end, region, ID, time, {SAMPLES_COVERAGE}]
-covdata <- cov.data("~/varhound_dev/TSO500_COVERAGE/test/210715_A01423_0008_AH35CWDRXY/coverage")
+covdata <- cov.data("~/VarHound/test_snv_coverage")
 head(covdata)
 
 
@@ -90,7 +90,7 @@ plot(Q1$bar)
 ### Unit Test 5: Sample-level covdata aggregation.
 
 # Preparing run-level covdata aggregates
-run <- vh.panel(covdir = "~/varhound_dev/TSO500_COVERAGE/test/210715_A01423_0008_AH35CWDRXY/coverage",
+run <- vh.panel(covdir = "~/VarHound/test_snv_coverage",
                 runtype = "snv", format = "bed", depths = depths,
 				plot.name = "wholePanel_exonCoverage.png",
 				y.label = "Percent of covered exons",
@@ -125,7 +125,7 @@ runtype <- "rna"
 
 depths <- c("5x", "10x", "50x", "100x", "250x", "500x")
 
-covdir <- "~/varhound_dev/TSO500_COVERAGE/Validation/rna_coverage_test"
+covdir <- "~/VarHound/test_rna_coverage"
 
 outdir <- paste0(covdir, "/CoverageDiagnostics")
 if (!file.exists(outdir)) dir.create(outdir)
@@ -245,7 +245,7 @@ runtype <- "rna"
 
 depths <- c("5x", "10x", "50x", "100x", "250x", "500x")
 
-covdir <- "~/varhound_dev/TSO500_COVERAGE/Validation/rna_genecov_test"
+covdir <- "~/VarHound/test_single_rna_sample"
 
 outdir <- paste0(covdir, "/CoverageDiagnostics")
 if (!file.exists(outdir)) dir.create(outdir)
@@ -256,6 +256,7 @@ if (!file.exists(outdir)) dir.create(outdir)
 genecov <- vh.genecov(covdir = covdir, p = 75, d = "500x",
                       depths = depths,
                       runtype = runtype,
+		      format = "bed",
                       outdir = outdir)
 
 # BED files containing blacklisted exons
