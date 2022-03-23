@@ -1,6 +1,7 @@
 # VarHound - TSO500 - Coverage diagnostics launcher
 
 suppressMessages(library(dplyr))
+suppressMessages(library(stringr))
 suppressMessages(library(ggplot2))
 suppressMessages(library(reshape2))
 suppressMessages(library(Cairo))

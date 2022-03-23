@@ -17,7 +17,7 @@ suffix = "thresholds.bed"
 
 if len(sys.argv) == 1:
 	exit("VarHound software - v0.0.2\n" +
-	      "USAGE:\n  vhLaunch.py COVERAGE_DIRECTORY [snv|cnv|rna]")
+	      "USAGE:\n  vhLaunch.py COVERAGE_DIRECTORY [snv|cnv|rna|fusion]")
 
 covpath = os.path.normpath(sys.argv[1])
 vhrunx = ' ' + os.path.join(VarHound, "vhLaunch.R")
