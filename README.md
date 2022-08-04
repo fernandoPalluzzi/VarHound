@@ -7,7 +7,7 @@ can be applied to any other DNA/RNA sequencing panel.
 
 ## Installation
 
-The VH suite can be used by cloning or copying its repository to a given directory. Once downloaded, go to the VarHound directory and open the paths.ini file with any text editor. It looks kithe the following:
+The VH suite can be used by cloning or copying its repository to a given directory. Once downloaded, go to the **VarHound** directory and open the **paths.ini** file with any text editor. It looks kithe the following:
 
 ```bash
 [path]
@@ -23,7 +23,7 @@ manifest = conf/TST500C_manifest.bed
 reference = conf/UCSC_KnownGenes_hg19_TSO500_FPG.bed
 ```
 
-The VH suite compute two kinds of coverage diagnostics: high-level and per-base. In the former, sequencing coverage is analyzed at exon level, while in the latter, the sequencing coverage profile is analyzed at single base level. Environmental variables are set to find the VH executable code, process thi input data at different levels, and use the required annotations (available in the VH repository).
+The VH suite compute two kinds of coverage diagnostics: **high-level** and **per-base**. In the former, sequencing coverage is analyzed at **exon level**, while in the latter, the sequencing coverage profile is analyzed at **single base level**. Environmental variables are set to find the VH executable code, process thi input data at different levels, and use the required annotations (available in the VH repository).
 
 Be sure that the **VarHound** variable is set to the absolute path of the VH directory inside your filesystem (by default it is set to the home directory: **~/VarHound**). The other environmental variables are defined as follows:
 
