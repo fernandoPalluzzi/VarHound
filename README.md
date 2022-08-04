@@ -25,7 +25,7 @@ reference = conf/UCSC_KnownGenes_hg19_TSO500_FPG.bed
 
 The VH suite compute two kinds of coverage diagnostics: **high-level** and **per-base**. In the former, sequencing coverage is analyzed at **exon level**, while in the latter, the sequencing coverage profile is analyzed at **single base level**. Environmental variables are set to find the VH executable code, process thi input data at different levels, and use the required annotations (available in the VH repository).
 
-Be sure that the **VarHound** variable is set to the absolute path of the VH directory inside your filesystem (by default it is set to the home directory: **~/VarHound**). The other environmental variables are defined as follows:
+The **VarHound** variable must be set to the absolute path of the VH directory inside your filesystem (by default it is set to the home directory: **~/VarHound**). The other environmental variables are defined as follows:
 
 - **suffix**. The suffix used for the input coverage files. By default, filenames in the form xxx.thresholds.bed (or xxx.thresholds.bed.gz) are processed.
 - **pbcov**. The suffix used for the input per-base coverage files. By default, filenames in the form xxx.per-base.bed (or xxx.per-base.bed.gz) are processed.
