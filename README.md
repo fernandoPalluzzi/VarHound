@@ -30,7 +30,7 @@ Be sure that the **VarHound** variable is set to the absolute path of the VH dir
 - **suffix**. The suffix used for the input coverage files. By default, filenames in the form xxx.thresholds.bed (or xxx.thresholds.bed.gz) are processed.
 - **pbcov**. The suffix used for the input per-base coverage files. By default, filenames in the form xxx.per-base.bed (or xxx.per-base.bed.gz) are processed.
 - **manifest**. The relative path of the BED format file containing the genomic coordinates (hg19 assembly) of all the regions covered by the TSO500 panel.
-- **reference**. Reference gene coordinates (hg19 assembly). By default, a restricted dataset from the [**UCSC Genome Browser**](https://genome.ucsc.edu/) KnownGenes is used. The full KnownGenes dataset (conf/UCSC_KnownGenes_hg19_canonical.bed) is also available.
+- **reference**. Reference gene coordinates (hg19 assembly). By default, a restricted dataset from the [**UCSC Genome Browser**](https://genome.ucsc.edu/) KnownGenes database is used. The full KnownGenes dataset (conf/UCSC_KnownGenes_hg19_canonical.bed) is also available.
 
 ## Coverage diagnostics for the TSO500 assay.
 
