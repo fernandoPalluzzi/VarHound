@@ -5,7 +5,7 @@ for the storage, management, and retrieval of large VCF files. In addition, VH o
 validation tools, through coverage analysis. VH is originally designed for truSight oncology 500 (TSO500) assays, but 
 can be applied to any other DNA/RNA sequencing panel.
 
-## Installation
+## 1. Installation
 
 The VH suite can be used by cloning or copying its repository to a given directory. Once downloaded, go to the **VarHound** directory and open the **paths.ini** file with any text editor. It looks kithe the following:
 
@@ -62,14 +62,31 @@ Example:
   vhLaunch.py ~/TSO500 x80
 ```
 
-## Coverage diagnostics for the TSO500 assay.
+## 2. Coverage diagnostics for the TSO500 assay.
 
-...
+The VH coverage analysis tool takes in input a coverage directory and recursively search for (possibly gzipped) coverage input files, generating a number of useful reports. The input data can be placed anywhere in the directory tree, and can be easily generated with open-source tools, such as [**mosdepth**](https://github.com/brentp/mosdepth). The analysis scheme is shown below:
 
-## VCF file indexing.
+```
+SNV --+                                +--- High-level analysis
+      |                                |     +--> Whole-panel coverage barplot
+      +-- DNA --+                      |     +--> Sample-level coverage table and boxplots
+      |         |                      |     +--> Gene-level coverage table, boxplots, and blacklisted regions (BED)
+CNV --+         +--> RUN DIRECTORY --> + 
+                |                      |    
+                |                      +--- Base-level analysis
+                |                            +--> Coverage drops BED file
+                |                            +--> Gene drops BED file
+          RNA --+                            +--> Coverage drops UCSC Genome Browser track file
+```
+
+### 2.1. High-level coverage diagnostics (basic usage)
+
+
+
+## 3. VCF file indexing.
 
 Under construction.
 
-## Links to other repos
+## 4. Links to other repos
 
-Under construction.
+[**Kew**](https://github.com/fernandoPalluzzi/KewTools) is a simple command line tool for [**SQLite**](https://sqlite.org) database creation and querying. It enables the creation and manipulation of big files and directories, also for non SQL or Python experts, by indexing them with the [**sqlite3**](https://docs.python.org/3.8/library/sqlite3.html) Python library.
