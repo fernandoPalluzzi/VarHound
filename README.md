@@ -66,7 +66,6 @@ Example:
 
 The VH coverage analysis tool takes in input a coverage directory and recursively search for (possibly gzipped) coverage input files, generating a number of useful reports. The input data can be placed anywhere in the directory tree, and can be easily generated with open-source tools, such as [**mosdepth**](https://github.com/brentp/mosdepth). The analysis scheme is shown below:
 
-```
 SNV --+                                +--- High-level analysis
       |                                |     +--> Whole-panel coverage barplot
       +-- DNA --+                      |     +--> Sample-level coverage table and boxplots
@@ -77,11 +76,10 @@ CNV --+         +--> RUN DIRECTORY --> +
                 |                            +--> Coverage drops BED file
                 |                            +--> Gene drops BED file
           RNA --+                            +--> Coverage drops UCSC Genome Browser track file
-```
 
 ### 2.1. High-level coverage diagnostics (basic usage)
 
-
+...
 
 ## 3. VCF file indexing.
 
