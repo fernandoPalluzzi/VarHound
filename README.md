@@ -30,7 +30,37 @@ The **VarHound** variable must be set to the absolute path of the VH directory i
 - **suffix**. The suffix used for the input coverage files. By default, filenames in the form xxx.thresholds.bed (or xxx.thresholds.bed.gz) are processed.
 - **pbcov**. The suffix used for the input per-base coverage files. By default, filenames in the form xxx.per-base.bed (or xxx.per-base.bed.gz) are processed.
 - **manifest**. The relative path of the BED format file containing the genomic coordinates (hg19 assembly) of all the regions covered by the TSO500 panel.
-- **reference**. Reference gene coordinates (hg19 assembly). By default, a restricted dataset from the [**UCSC Genome Browser**](https://genome.ucsc.edu/) KnownGenes database is used. The full KnownGenes dataset (conf/UCSC_KnownGenes_hg19_canonical.bed) is also available.
+- **reference**. Reference gene coordinates (hg19 assembly). By default, a restricted panel of 64 genes from the [**UCSC Genome Browser**](https://genome.ucsc.edu/) KnownGenes database is used. The full KnownGenes dataset (conf/UCSC_KnownGenes_hg19_canonical.bed) is also available.
+
+Once the VH variables are set, the user should add the VH absolute path to the PATH environmental variable:
+
+```bash
+# Extended PATH variables set
+export PATH=$PATH:~/chosen_directory/VarHound
+```
+
+To work properly, the VH directory needs execution rights. If not (or not sure), they can be changed with:
+
+```bash
+chmod -R 700 ~/chosen_directory/VarHound
+```
+
+Now, from a Bash terminal, the `vhLaunch.py` command should give the following message:
+
+```
+          ## VarHound software ##
+# Coverage Analysis (VarHound-CA) - v0.1.0 #
+
+BASIC USAGE:
+  vhLaunch.py COVERAGE_DIRECTORY [snv|cnv|rna|fusion]
+Example:
+  vhLaunch.py ~/TSO500 cnv
+
+PER-BASE ANALYSIS:
+  vhLaunch.py COVERAGE_DIRECTORY x<COVERAGE_THRESHOLD>
+Example:
+  vhLaunch.py ~/TSO500 x80
+```
 
 ## Coverage diagnostics for the TSO500 assay.
 
@@ -42,8 +72,4 @@ Under construction.
 
 ## Links to other repos
 
-To be done.
-
-## Disclaimer
-
-VarHound is an ongoing project for TSO500 validation. Although I am happy to share the code with the community, it is still in its embryo stage!
+Under construction.
