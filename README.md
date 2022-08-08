@@ -68,11 +68,12 @@ The VH coverage analysis tool takes in input a coverage directory and recursivel
 
 ```
 SNV --+                                +--- High-level analysis
-      |                                |     +--> Whole-panel coverage barplot
-      +-- DNA --+                      |     +--> Sample-level coverage table and boxplots
-      |         |                      |     +--> Gene-level coverage table, boxplots, and blacklisted regions (BED)
+      |                                |     +--> Whole-panel coverage
+      +-- DNA --+                      |     +--> Sample-level coverage
+      |         |                      |     +--> Gene-level coverage
+      |         |                      |           +--> blacklisted regions (BED)
 CNV --+         +--> RUN DIRECTORY --> + 
-                |                      |    
+                |                      | 
                 |                      +--- Base-level analysis
                 |                            +--> Coverage drops BED file
                 |                            +--> Gene drops BED file
