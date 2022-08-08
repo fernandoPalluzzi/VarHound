@@ -23,7 +23,7 @@ manifest = conf/TST500C_manifest.bed
 reference = conf/UCSC_KnownGenes_hg19_TSO500_FPG.bed
 ```
 
-The VH suite compute two kinds of coverage diagnostics: **high-level** and **per-base**. In the former, sequencing coverage is analyzed at **exon level**, while in the latter, the sequencing coverage profile is analyzed at **single base level**. Environmental variables are set to find the VH executable code, process thi input data at different levels, and use the required annotations (available in the VH repository).
+The VH suite compute two kinds of coverage diagnostics: **high-level** and **per-base**. In the former, sequencing coverage is analyzed at **exon level**, while in the latter, the sequencing coverage profile is analyzed at **single base level**.
 
 The **VarHound** variable must be set to the absolute path of the VH directory inside your filesystem (by default, it is set to the home directory: **~/VarHound**). The other environmental variables are defined as follows:
 
@@ -67,20 +67,32 @@ Example:
 The VH coverage analysis tool takes in input a coverage directory and recursively search for (possibly gzipped) coverage input files, generating a number of useful reports. The input data can be placed anywhere in the directory tree, and can be easily generated with open-source tools, such as [**mosdepth**](https://github.com/brentp/mosdepth). The analysis scheme is shown below:
 
 ```
+# INPUT SAMPLES #                      # ANALYSIS OUTPUT #
+ 
 SNV --+                                +--- High-level analysis
-      |                                |     +--> Whole-panel coverage
-      +-- DNA --+                      |     +--> Sample-level coverage
-      |         |                      |     +--> Gene-level coverage
-      |         |                      |           +--> blacklisted regions (BED)
+      |                                |     +-- Whole-panel coverage
+      +-- DNA --+                      |     +-- Sample-level coverage
+      |         |                      |     +-- Gene-level coverage
+      |         |                      |           +-- blacklisted regions (BED)
 CNV --+         +--> RUN DIRECTORY --> + 
                 |                      | 
                 |                      +--- Base-level analysis
-                |                            +--> Coverage drops BED file
-                |                            +--> Gene drops BED file
-          RNA --+                            +--> Coverage drops UCSC Genome Browser track file
+                |                            +-- Coverage drops BED file
+                |                            +-- Gene drops BED file
+          RNA --+                            +-- Coverage drops UCSC Genome Browser track file
 ```
 
-### 2.1. High-level coverage diagnostics (basic usage)
+### 2.1. High-level coverage diagnostics
+
+High-level coverage diagnostics can be enabled using the `vhLauch.py` command specifying one of the available variant types (snv, cnv, rna, fusion):
+
+```
+vhLaunch.py ~/TSO500 snv
+```
+
+
+
+### 2.2. Base-level coverage diagnostics
 
 ...
 
@@ -90,4 +102,4 @@ Under construction.
 
 ## 4. Links to other repos
 
-[**Kew**](https://github.com/fernandoPalluzzi/KewTools) is a simple command line tool for [**SQLite**](https://sqlite.org) database creation and querying. It enables the creation and manipulation of big files and directories, also for non SQL or Python experts, by indexing them with the [**sqlite3**](https://docs.python.org/3.8/library/sqlite3.html) Python library.
+**Data indexing**. [**Kew**](https://github.com/fernandoPalluzzi/KewTools) is a simple command line tool for [**SQLite**](https://sqlite.org) database creation and querying. It enables the creation and manipulation of big files and directories, also for non SQL or Python experts, by indexing them with the [**sqlite3**](https://docs.python.org/3.8/library/sqlite3.html) Python library.
