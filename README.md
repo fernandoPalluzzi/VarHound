@@ -84,13 +84,17 @@ CNV --+         +--> RUN DIRECTORY --> +
 
 ### 2.1. High-level coverage diagnostics
 
-High-level coverage diagnostics can be enabled using the `vhLauch.py` command specifying one of the available variant types (snv, cnv, rna, fusion):
+High-level coverage diagnostics can be enabled using the `vhLauch.py` command specifying one of the available variant types (`snv`, `cnv`, `rna`, `fusion`):
 
 ```
 vhLaunch.py ~/TSO500 snv
 ```
 
+Input coverage files will be recursively searched within the given input direcory and subdirectories, recruiting all those files with the suffix specified by the environmental variables (by default, "thresholds.bed" and "thresholds.bed.gz"). The input folder is considered as a single *run*, where each coverage file comes from a subject. The thresholds.bed file should have the following mandatory fields: chromosome, region (exon) start, region (exon) end, region ID, 5x depth, 10x depth, 50x depth, 100x depth, 250x depth, and 500x depth. Coverages at a given depth can be obtained using SAM/BAM analysis tools, such as [**samtools**](https://github.com/samtools), [**deepTools**](https://deeptools.readthedocs.io/en/develop), and [**mosdepth**](https://github.com/brentp/mosdepth).
 
+For each region, for a given depth, VarHound computes the number of bases covered at that depth (count data). Coverage count data is then converted into frequency data (i.e., the percent coverage, *p*), dividing by region length. VarHound coverage analysis starts from a *covdata* file, including the input fields and median values of *p* across samples (i.e., subjects), referred to as **median percent coverage** (MPC). As a good quality principle, a run should maximize the number of depths with MPC ≥ 75%. Similarly, at a given depth *D*, for each sample *x*, the first quartile of the exon percent coverage distribution should be ≥ 75% (i.e., at least 75% of the exons of *x* should be covered by at least 75%, at depth *D*).
+
+The outputs include: (i) run-level parplots reporting MPC distribution at each depth, (ii) subject-level boxplot reporting the distribution of exon MPC (y axis) for each subject (x axis), (iii) boxplot of exon MPC (y axis) for each gene (x axis), and (iv) one blacklisted region (exon) file for each depth, including the following fields: chromosome, region start, region end, region name, gene symbol, genomic element, region id (RefSeq ID, in case of genes), entry ID (internal usage), time (internal usage), Q1 ( it should be < 75), depth.  
 
 ### 2.2. Base-level coverage diagnostics
 
