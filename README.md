@@ -84,7 +84,7 @@ CNV --+         +--> RUN DIRECTORY --> +
 
 ### 2.1. High-level coverage diagnostics
 
-High-level coverage diagnostics can be enabled using the `vhLauch.py` command specifying one of the available variant types (`snv`, `cnv`, `rna`, `fusion`):
+High-level coverage diagnostics can be enabled using the `vhLauch.py` command, followed by the input directory, and the variant type (`snv`, `cnv`, `rna`, `fusion`):
 
 ```
 vhLaunch.py ~/TSO500 snv
@@ -102,7 +102,20 @@ The outputs include:
 
 ### 2.2. Base-level coverage diagnostics
 
-...
+High-level coverage analysis cannot find small coverage drops (from 1 bp to roughly 100 bp) within highly covered regions. However, narrow coverage drops might hide false negative variant calls in apparently covered regions, potentially leading to undiagnosed pathogenic or malignant traits.
+
+High-level coverage diagnostics can be enabled using the `vhLauch.py` command, followed by the input directory, and the desired coverage threshold preceeded by an "x" (in the example below, all the bases below 80 reads of coverage will be marked as drops):
+
+```
+vhLaunch.py ~/TSO500 x80
+```
+
+Here, the algorithm will recursively search for base-coverage files, as indicated by the *pbcov* environmental variable (by default, these file should have a per-base.bed suffix). These files must have the following columns: chromosome, start, end, coverage value.
+
+This analysis generates three output files:
+- A gene drops BED file (attributes: ).
+
+
 
 ## 3. VCF file indexing.
 
