@@ -113,9 +113,9 @@ vhLaunch.py ~/TSO500 x80
 Here, the algorithm will recursively search for base-coverage files, as indicated by the *pbcov* environmental variable (by default, these file should have a per-base.bed suffix). These files must have the following columns: chromosome, start, end, coverage value.
 
 This analysis generates three output files:
-- A gene drops BED file (attributes: ).
-
-
+- A coverage drops BED file (fields: chromosome, drop start, drop end, region name, median coverage of the drop)
+- A coverage drops UCSC Genome Browser BED track (fields: chromosome, start, end, name, score as the median coverage of the region, strand, thickStart, thickEnd, itemRgb). This file can be directly uploaded and viewed using the UCSC Genome Browser track viewer.
+- A gene drops BED file (fields: chromosome, gene start, gene end, gene symbol, gene exon count, strand, number of exon drops at the given coverage threshold).
 
 ## 3. VCF file indexing.
 
