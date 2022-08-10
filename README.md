@@ -110,7 +110,7 @@ High-level coverage diagnostics can be enabled using the `vhLauch.py` command, f
 vhLaunch.py ~/TSO500 x80
 ```
 
-Here, the algorithm will recursively search for base-coverage files, as indicated by the *pbcov* environmental variable (by default, these file should have a per-base.bed suffix). These files must have the following columns: chromosome, start, end, coverage value.
+Here, the algorithm will recursively search for base-coverage files, as indicated by the *pbcov* environmental variable (by default, these file should have a "per-base.bed" suffix). These files must have the following columns: chromosome, start, end, coverage value.
 
 This analysis generates three output files:
 - A coverage drops BED file (fields: chromosome, drop start, drop end, region name, median coverage of the drop)
