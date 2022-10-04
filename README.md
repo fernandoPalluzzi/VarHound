@@ -7,7 +7,7 @@ can be applied to any other DNA/RNA sequencing panel.
 
 ## 1. Installation
 
-The VH suite can be used by cloning or copying its repository to a given directory. Once downloaded, go to the **VarHound** directory and open the **paths.ini** file with any text editor. It looks kithe the following:
+The VH suite can be used by cloning or copying its repository to a given directory. Once downloaded, go to the **VarHound** directory and open the **paths.ini** file with any text editor. It looks like the following:
 
 ```bash
 [path]
