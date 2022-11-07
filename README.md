@@ -123,10 +123,10 @@ vhReadAnnotations.py /path_to_annotated_VCF_files
 
 The chosen path must contain VCF files without headers (i.e., plain tab-separated text). Headers can be recursively removed with the `cleanAnnotations.py` script. Annotated VCF files must have the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
 
-- `--identifier`  A vector of length 2 specifying the gene name field and the generic label name used for genewise data aggregation. Deafult: ['SYMBOL', 'labels']
-- `--vclass`  Variant class. Default: 'VARIANT_CLASS'
-- `--impact`  Variant impact. Default: 'IMPACT'
-- `--order`  Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER']
+- `--identifier` &nbsp;&nbsp; A vector of length 2 specifying the gene name field and the generic label name used for genewise data aggregation. Deafult: ['SYMBOL', 'labels']
+- `--vclass` &nbsp;&nbsp; Variant class. Default: 'VARIANT_CLASS'
+- `--impact` &nbsp;&nbsp; Variant impact. Default: 'IMPACT'
+- `--order` &nbsp;&nbsp; Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER']
 
 Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. An annotated VCF containing these fields can be obtained using the [**variant effect predictor (VEP)**](https://grch37.ensembl.org/info/docs/tools/vep) tool. A full pipeline for genomic variant calling and annotation is available at the [**nfcore Sarek website**](https://nf-co.re/sarek). Additional options can be viewed by launching `vhReadAnnotations.py -h`
 
