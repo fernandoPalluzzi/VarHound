@@ -126,7 +126,7 @@ vhReadAnnotations.py /path_to_annotated_VCF_files
 
 The chosen path must contain VCF files without headers (i.e., plain tab-separated text) with the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
 
-- `--identifier`. A vector of length 2 specifying the . Deafult: ['SYMBOL', 'labels'].
+- `--identifier`. A vector of length 2 specifying the gene name field and the generic label name used for genewise data aggregation. Deafult: ['SYMBOL', 'labels'].
 - `--vclass`. Variant class. Default: 'VARIANT_CLASS'.
 - `--impact`. Variant impact. Default: 'IMPACT'.
 - `--order`. Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER'].
