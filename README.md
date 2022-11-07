@@ -112,7 +112,7 @@ This analysis generates three output files:
 - A coverage drops UCSC Genome Browser BED track (fields: chromosome, start, end, name, score as the median coverage of the region, strand, thickStart, thickEnd, itemRgb). This file can be directly uploaded and viewed using the UCSC Genome Browser track viewer.
 - A gene drops BED file (fields: chromosome, gene start, gene end, gene symbol, gene exon count, strand, number of exon drops at the given coverage threshold).
 
-## 3. VCF file descriptive plots.
+## 3. VCF file descriptive plots and tables.
 
 The VH suite includes the `vhReadAnnotations.py` script to create a number of descriptive plots and tables for annotated [**VCF files**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format/).
 For a basic usage, the script only requires a folder with annotated VCF files:
@@ -121,7 +121,7 @@ For a basic usage, the script only requires a folder with annotated VCF files:
 vhReadAnnotations.py /path_to_annotated_VCF_files
 ```
 
-The chosen path must contain VCF files without headers (i.e., plain tab-separated text) with the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
+The chosen path must contain VCF files without headers (i.e., plain tab-separated text). Headers can be recursively removed with the `cleanAnnotations.py` script. Annotated VCF files must have the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
 
 - `--identifier`. A vector of length 2 specifying the gene name field and the generic label name used for genewise data aggregation. Deafult: ['SYMBOL', 'labels']
 - `--vclass`. Variant class. Default: 'VARIANT_CLASS'
