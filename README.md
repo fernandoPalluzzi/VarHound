@@ -126,14 +126,14 @@ vhReadAnnotations.py /path_to_annotated_VCF_files
 
 The chosen path must contain VCF files without headers (i.e., plain tab-separated text) with the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
 
-- `--identifier`. Genomic element ID (e.g., gene name) in the input file and generica label name in the output tables. Deafult: ['SYMBOL', 'labels'].
+- `--identifier`. A vector of length 2 specifying the . Deafult: ['SYMBOL', 'labels'].
 - `--vclass`. Variant class. Default: 'VARIANT_CLASS'.
 - `--impact`. Variant impact. Default: 'IMPACT'.
 - `--order`. Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER'].
 
 Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. An annotated VCF, containing these fields, can be obtained using the [**variant effect predictor (VEP)**](https://grch37.ensembl.org/info/docs/tools/vep) tool. A full pipeline for genomic variant calling and annotation is available at the [**nfcore Sarek website**](https://nf-co.re/sarek). Additional options can be viewed using `vhReadAnnotations.py -h`.
 
-The output is organized within the input directory, using the following scheme:
+Descriptive plots and tables are generated both for each VCF file and for the entire cohort (represented by the files within the input directory). The whole output is organized within the input directory, according to the following scheme:
 
 ```
             +-- Input_annotated_VCF1                   +-- overall_variants_barplot
