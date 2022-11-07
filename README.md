@@ -93,7 +93,7 @@ Input coverage files will be recursively searched within the given input direcor
 For each region, for a given depth, VarHound computes the number of bases covered at that depth (count data). Coverage count data is then converted into frequency data (i.e., the percent coverage, *p*), dividing by region length. VarHound coverage analysis starts from a *covdata* file, including the input fields and median values of *p* across samples (i.e., subjects), referred to as **median percent coverage** (MPC). As a good quality principle, a run should maximize the number of depths with MPC ≥ 75%. Similarly, at a given depth *D*, for each sample *x*, the first quartile of the exon percent coverage distribution should be ≥ 75% (i.e., at least 75% of the exons of *x* should be covered by at least 75%, at depth *D*).
 
 The outputs include:
-- run-level parplots showing the MPC distribution for each depth,
+- run-level barplots showing the MPC distribution for each depth,
 - subject-level boxplot reporting the distribution of exon MPC (y axis) for each subject (x axis),
 - boxplot of exon MPC (y axis) for each gene (x axis),
 - a blacklisted region (exon) BED file for each depth, including the following fields: chromosome, region start, region end, region name, gene symbol, genomic element, region id (RefSeq ID, in case of genes), entry ID (internal usage), time (internal usage), Q1 (first MPC quartile; it should be < 75), depth of coverage.
@@ -115,10 +115,74 @@ This analysis generates three output files:
 - A coverage drops UCSC Genome Browser BED track (fields: chromosome, start, end, name, score as the median coverage of the region, strand, thickStart, thickEnd, itemRgb). This file can be directly uploaded and viewed using the UCSC Genome Browser track viewer.
 - A gene drops BED file (fields: chromosome, gene start, gene end, gene symbol, gene exon count, strand, number of exon drops at the given coverage threshold).
 
-## 3. VCF file indexing.
+## 3. VCF file descriptive plots.
+
+The VH suite includes the `vhReadAnnotations.py` script to create a number of descriptive plots and tables for annotated [**VCF files**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format/).
+For a basic usage, the script only requires a folder with annotated VCF files:
+
+```
+vhReadAnnotations.py /path_to_annotated_VCF_files
+```
+
+The chosen path must contain VCF files without headers (i.e., plain tab-separated text) with the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
+
+- `--identifier`. Genomic element ID (e.g., gene name) in the input file and generica label name in the output tables. Deafult: ['SYMBOL', 'labels'].
+- `--vclass`. Variant class. Default: 'VCLASS'.
+- `--impact`. Variant impact. Default: 'IMPACT'.
+- `--order`. Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER'].
+
+Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. An annotated VCF, containing these fields, can be obtained using the [**variant effect predictor (VEP)**](https://grch37.ensembl.org/info/docs/tools/vep) tool. A full pipeline for genomic variant calling and annotation is available at the [**nfcore Sarek website**](https://nf-co.re/sarek).
+
+The output is organized within the input directory, whith the following scheme:
+
+```
+            +-- Annotated_VCF1                         +-- overall_variants_barplot
+            +-- Annotated_VCF2                         +-- overall_variants_stackedbars
+            +-- ...                                    +-- topk_high_impact_genes_barplot
+            |                                          +-- topk_mutated_genes_barplot
+            |                                          +-- ClinSig_impact_piechart
+            |                           +-- bySample --+-- ClinVar_impact_piechart
+            |                           |              |
+            |                           |              |                      +-- Variant_impact_table_by_gene
+            |                           |              |                      +-- Variant_impact_table_by_class
+            |                           |              +-- counts_directory --+-- ClinSig_impact_freqs
+            |                           |                                     +-- ClinVar_impact_freqs
+            |                           |
+Input_dir --+-- Annotated_VCF1_outdir --+
+            |                           |
+            |                           |                              +-- Variants_impact_barplot
+            |                           |                              +-- topk_high_impact_genes_barplot
+            |                           |              +-- SNV --------+-- topk_mutated_genes_barplot
+            |                           |              |               |
+            |                           |              |               +-- counts_directory --+-- Variant_impact_table_by_gene
+            |                           |              |                                      +-- Variant_impact_freqs
+            |                           |              |
+            |                           +-- byClass ---+-- deletion ---+-- ...
+            |                                          +-- insertion --+-- ...
+            |                                          +-- ...
+            |
+            +-- Annotated_VCF2_outdir --+ ...
+            |
+            +-- Annotated_VCFn_outdir --+ ...
+            |
+            |                                            +-- Impact_piechart
+            |                           +-- SNV ---------+-- topk_high_impact_genes_barplot
+            |                           |                +-- topk_mutated_genes_barplot
+            |                           |                +-- Genes_annotation_table
+            |                           | 
+            +-- Overall ----------------+-- deletion ----+-- ...
+                                        |
+                                        +-- insertion ---+-- ...
+                                        |
+                                        +-- ...
+                                        |
+                                        +-- trash (intermediate files)                                        
+```
+
+## 4. VCF file indexing.
 
 Under construction.
 
-## 4. Links to other repos
+## 5. Links to other repos
 
 **Data indexing**. [**Kew**](https://github.com/fernandoPalluzzi/KewTools) is a simple command line tool for [**SQLite**](https://sqlite.org) database creation and querying. It enables the creation and manipulation of big files and directories, also for non SQL or Python experts, by indexing them with the [**sqlite3**](https://docs.python.org/3.8/library/sqlite3.html) Python library.
