@@ -150,6 +150,7 @@ Input_dir --+-- Annotated_VCF1_outdir
             |     |    +-- ClinSig_impact_piechart
             |     |    +-- ClinVar_impact_piechart
             |     |    +-- Counts_directory
+            |     |         |
             |     |         +-- Variant_impact_table_by_gene
             |     |         +-- Variant_impact_table_by_class
             |     |         +-- ClinSig_impact_freqs
@@ -162,6 +163,7 @@ Input_dir --+-- Annotated_VCF1_outdir
             |          |    +-- topk_high_impact_genes_barplot
             |          |    +-- topk_mutated_genes_barplot
             |          |    +-- Counts_directory
+            |          |         |
             |          |         +-- Variant_impact_table_by_gene
             |          |         +-- Variant_impact_freqs
             |          |
