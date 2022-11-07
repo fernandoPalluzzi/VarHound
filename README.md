@@ -136,47 +136,71 @@ Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. A
 Descriptive plots and tables are generated both for each VCF file and for the entire cohort (represented by the files within the input directory). The whole output is organized within the input directory, according to the following scheme:
 
 ```
-            +-- Input_annotated_VCF1                   +-- overall_variants_barplot
-            +-- Input_annotated_VCF2                   +-- overall_variants_stackedbars
-            +-- ...                                    +-- topk_high_impact_genes_barplot
-            |                                          +-- topk_mutated_genes_barplot
-            |                                          +-- ClinSig_impact_piechart
-            |                           +-- bySample --+-- ClinVar_impact_piechart
-            |                           |              |
-            |                           |              |                      +-- Variant_impact_table_by_gene
-            |                           |              |                      +-- Variant_impact_table_by_class
-            |                           |              +-- counts_directory --+-- ClinSig_impact_freqs
-            |                           |                                     +-- ClinVar_impact_freqs
-            |                           |
-Input_dir --+-- Annotated_VCF1_outdir --+
-            |                           |
-            |                           |                              +-- Variants_impact_barplot
-            |                           |                              +-- topk_high_impact_genes_barplot
-            |                           |              +-- SNV --------+-- topk_mutated_genes_barplot
-            |                           |              |               |
-            |                           |              |               +-- counts_dir --+-- Variant_impact_table_by_gene
-            |                           |              |                                +-- Variant_impact_freqs
-            |                           |              |
-            |                           +-- byClass ---+-- deletion ---+-- ...
-            |                                          +-- insertion --+-- ...
-            |                                          +-- ...
+            +-- Input_annotated_VCF1                   
+            +-- Input_annotated_VCF2                   
+            +-- ...
             |
-            +-- Annotated_VCF2_outdir --+-- ...
+Input_dir --+-- Annotated_VCF1_outdir
+            |     |
+            |     +-- bySample
+            |     |    |
+            |     |    +-- overall_variants_barplot
+            |     |    +-- overall_variants_stackedbars
+            |     |    +-- topk_high_impact_genes_barplot
+            |     |    +-- topk_mutated_genes_barplot
+            |     |    +-- ClinSig_impact_piechart
+            |     |    +-- ClinVar_impact_piechart
+            |     |    +-- Counts_directory
+            |     |         |
+            |     |         +-- Variant_impact_table_by_gene
+            |     |         +-- Variant_impact_table_by_class
+            |     |         +-- ClinSig_impact_freqs
+            |     |         +-- ClinVar_impact_freqs
+            |     |
+            |     +-- byClass
+            |          |
+            |          +-- SNV
+            |          |    +-- Variants_impact_barplot
+            |          |    +-- topk_high_impact_genes_barplot
+            |          |    +-- topk_mutated_genes_barplot
+            |          |    +-- Counts_directory
+            |          |         +-- Variant_impact_table_by_gene
+            |          |         +-- Variant_impact_freqs
+            |          |
+            |          +-- deletion
+            |          |    +-- ...
+            |          |
+            |          +-- insertion
+            |          |    +-- ...
+            |          |
+            |          +-- ...
             |
-            +-- Annotated_VCFn_outdir --+-- ...
+            +-- Annotated_VCF2_outdir
+            |     |
+            |     +-- ...
             |
-            |                                            +-- Impact_piechart
-            |                           +-- SNV ---------+-- topk_high_impact_genes_barplot
-            |                           |                +-- topk_mutated_genes_barplot
-            |                           |                +-- Genes_annotation_table
-            |                           | 
-            +-- Overall ----------------+-- deletion ----+-- ...
-                                        |
-                                        +-- insertion ---+-- ...
-                                        |
-                                        +-- ...
-                                        |
-                                        +-- trash (intermediate files)                                        
+            +-- Annotated_VCFn_outdir
+            |     |
+            |     +-- ...
+            |
+            +-- Overall
+            |    |
+            |    +-- SNV
+            |    |    |
+            |    |    +-- Impact_piechart
+            |    |    +-- topk_high_impact_genes_barplot
+            |    |    +-- topk_mutated_genes_barplot
+            |    |    +-- Genes_annotation_table
+            |    |
+            |    +-- deletion
+            |    |    +-- ...
+            |    |
+            |    +-- insertion
+            |    |    +-- ...
+            |    |
+            |    +-- ...
+            |
+            +-- trash (intermediate files)
 ```
 
 ## 4. VCF file indexing.
