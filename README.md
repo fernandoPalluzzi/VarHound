@@ -131,7 +131,7 @@ The chosen path must contain VCF files without headers (i.e., plain tab-separate
 - `--impact`. Variant impact. Default: 'IMPACT'.
 - `--order`. Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER'].
 
-Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. An annotated VCF, containing these fields, can be obtained using the [**variant effect predictor (VEP)**](https://grch37.ensembl.org/info/docs/tools/vep) tool. A full pipeline for genomic variant calling and annotation is available at the [**nfcore Sarek website**](https://nf-co.re/sarek).
+Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. An annotated VCF, containing these fields, can be obtained using the [**variant effect predictor (VEP)**](https://grch37.ensembl.org/info/docs/tools/vep) tool. A full pipeline for genomic variant calling and annotation is available at the [**nfcore Sarek website**](https://nf-co.re/sarek). Additional options can be viewed using `vhReadAnnotations.py -h`.
 
 The output is organized within the input directory, whith the following scheme:
 
