@@ -127,7 +127,7 @@ vhReadAnnotations.py /path_to_annotated_VCF_files
 The chosen path must contain VCF files without headers (i.e., plain tab-separated text) with the following [**GDC-compliant**](https://docs.gdc.cancer.gov/Data/File_Formats/VCF_Format) mandatory fields:
 
 - `--identifier`. Genomic element ID (e.g., gene name) in the input file and generica label name in the output tables. Deafult: ['SYMBOL', 'labels'].
-- `--vclass`. Variant class. Default: 'VCLASS'.
+- `--vclass`. Variant class. Default: 'VARIANT_CLASS'.
 - `--impact`. Variant impact. Default: 'IMPACT'.
 - `--order`. Impact in degreasing order. Default: ['HIGH', 'MODERATE', 'LOW', 'MODIFIER'].
 
