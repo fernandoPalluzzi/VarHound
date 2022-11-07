@@ -143,7 +143,6 @@ Descriptive plots and tables are generated both for each VCF file and for the en
 Input_dir --+-- Annotated_VCF1_outdir
             |     |
             |     +-- bySample
-            |     |    |
             |     |    +-- overall_variants_barplot
             |     |    +-- overall_variants_stackedbars
             |     |    +-- topk_high_impact_genes_barplot
@@ -151,7 +150,6 @@ Input_dir --+-- Annotated_VCF1_outdir
             |     |    +-- ClinSig_impact_piechart
             |     |    +-- ClinVar_impact_piechart
             |     |    +-- Counts_directory
-            |     |         |
             |     |         +-- Variant_impact_table_by_gene
             |     |         +-- Variant_impact_table_by_class
             |     |         +-- ClinSig_impact_freqs
@@ -176,17 +174,14 @@ Input_dir --+-- Annotated_VCF1_outdir
             |          +-- ...
             |
             +-- Annotated_VCF2_outdir
-            |     |
             |     +-- ...
             |
             +-- Annotated_VCFn_outdir
-            |     |
             |     +-- ...
             |
             +-- Overall
             |    |
             |    +-- SNV
-            |    |    |
             |    |    +-- Impact_piechart
             |    |    +-- topk_high_impact_genes_barplot
             |    |    +-- topk_mutated_genes_barplot
