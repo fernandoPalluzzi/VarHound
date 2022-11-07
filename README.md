@@ -154,8 +154,8 @@ Input_dir --+-- Annotated_VCF1_outdir --+
             |                           |                              +-- topk_high_impact_genes_barplot
             |                           |              +-- SNV --------+-- topk_mutated_genes_barplot
             |                           |              |               |
-            |                           |              |               +-- counts_directory --+-- Variant_impact_table_by_gene
-            |                           |              |                                      +-- Variant_impact_freqs
+            |                           |              |               +-- counts_dir --+-- Variant_impact_table_by_gene
+            |                           |              |                                +-- Variant_impact_freqs
             |                           |              |
             |                           +-- byClass ---+-- deletion ---+-- ...
             |                                          +-- insertion --+-- ...
