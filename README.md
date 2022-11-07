@@ -136,8 +136,8 @@ Two additional annotation fields are requred: `CLIN_SIG` and `ClinVar_CLNSIG`. A
 The output is organized within the input directory, using the following scheme:
 
 ```
-            +-- Annotated_VCF1                         +-- overall_variants_barplot
-            +-- Annotated_VCF2                         +-- overall_variants_stackedbars
+            +-- Input_annotated_VCF1                   +-- overall_variants_barplot
+            +-- Input_snnotated_VCF2                   +-- overall_variants_stackedbars
             +-- ...                                    +-- topk_high_impact_genes_barplot
             |                                          +-- topk_mutated_genes_barplot
             |                                          +-- ClinSig_impact_piechart
